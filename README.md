@@ -407,7 +407,7 @@
 10. สร้างบทสนทนาให้ยาวพอที่จะฟังได้ 6-12 นาที โดยแบ่งเป็นหลายรอบการสนทนา
 11. เริ่มด้วยการแนะนำหัวข้อ กลางเป็นการอภิปรายลึก และจบด้วยการสรุป
 
-Note: ห้ามเขียน **Speaker 1:** กับ **Speaker 2:** ไม่ถูกต้อง ต้องเปลี่ยนเป็นแบบนี้ Speaker 1: กับ Speaker 2: เท่านั้น
+Note: ห้ามเขียน **Speaker 1:** กับ **Speaker 2:** ไม่ถูกต้อง ต้องเปลี่ยนเป็นแบบนี้ Speaker 1: กับ Speaker 2: แบบนี้โดยเริ่มพูดจาก Speaker 1: ก่อนเท่านั้นแล้วตามลำดับ
 เริ่มสร้างบทสนทนา:`;
 
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`, {
