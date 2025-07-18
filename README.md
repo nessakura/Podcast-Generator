@@ -239,6 +239,29 @@
             font-size: 0.9em;
         }
 
+        .copy-btn {
+            background: #28a745; /* Green color for copy button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-top: 10px; /* Add some margin above the button */
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
@@ -301,6 +324,7 @@
                 <div class="full-script-display">
                     <h3>บทสนทนา Podcast (จัดเรียง)</h3>
                     <div class="full-script-content" id="fullScriptDisplay"></div>
+                    <button class="copy-btn" onclick="copyFullScript()">📋 คัดลอกบทสนทนา</button>
                 </div>
 
                 <div class="speaker-result" style="display: none;"> 
@@ -375,7 +399,7 @@
    Speaker 1: [ข้อความ]
    Speaker 2: [ข้อความ]
    (ย้ำ: ต้องสลับกันไปมาเสมอ เช่น Speaker 1: ... Speaker 2: ... Speaker 1: ... ห้ามมี Speaker คนเดิมพูดสองรอบติดกัน)
-5. ความยาวประมาณ 5-6 นาที เมื่ออ่าน (ประมาณ 800-1000 คำ รวมทั้งสองคน)
+5. ความยาวประมาณ 6-12 นาที เมื่ออ่าน (ประมาณ 800-1000 คำ รวมทั้งสองคน)
 6. ให้มีการแลกเปลี่ยนความคิดเห็น ถามตอบ และสรุปในตอนท้าย
 7. ใช้ภาษาไทยที่เข้าใจง่าย เหมาะสำหรับผู้ฟัง Podcast
 8. ให้ Speaker 1 (ชาย) มีน้ำเสียงที่มั่นใจ วิเคราะห์ อธิบายรายละเอียด
@@ -423,12 +447,10 @@ Note: ห้ามเขียน **Speaker 1:** กับ **Speaker 2:** ไม
                 if (line.startsWith('Speaker 1:')) {
                     const text = line.replace('Speaker 1:', '').trim();
                     speaker1Content += text + '\n';
-                    // เปลี่ยนจาก '👨 Speaker 1:' เป็น 'Speaker 1:'
                     fullScriptContent += '<span style="color: #667eea; font-weight: bold;">Speaker 1:</span> ' + text + '\n\n';
                 } else if (line.startsWith('Speaker 2:')) {
                     const text = line.replace('Speaker 2:', '').trim();
                     speaker2Content += text + '\n';
-                    // เปลี่ยนจาก '👩 Speaker 2:' เป็น 'Speaker 2:'
                     fullScriptContent += '<span style="color: #4ecdc4; font-weight: bold;">Speaker 2:</span> ' + text + '\n\n';
                 } else {
                     fullScriptContent += line + '\n\n';
@@ -443,6 +465,18 @@ Note: ห้ามเขียน **Speaker 1:** กับ **Speaker 2:** ไม
             
             document.getElementById('fullScriptDisplay').innerHTML = speakers.full.trim();
         }
+
+        // ***** ฟังก์ชันใหม่สำหรับคัดลอกข้อความ *****
+        function copyFullScript() {
+            const scriptToCopy = document.getElementById('fullScriptDisplay').innerText;
+            navigator.clipboard.writeText(scriptToCopy).then(() => {
+                alert('คัดลอกบทสนทนาเรียบร้อยแล้ว!');
+            }).catch(err => {
+                console.error('ไม่สามารถคัดลอกข้อความได้:', err);
+                alert('ไม่สามารถคัดลอกข้อความได้ โปรดลองคัดลอกด้วยตนเอง');
+            });
+        }
+        // ********************************************
 
         function showLoading(show) {
             const loading = document.getElementById('loading');
